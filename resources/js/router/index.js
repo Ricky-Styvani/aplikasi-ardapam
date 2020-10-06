@@ -5,6 +5,7 @@ import About from '../views/About.vue'
 
 export default{
     mode: 'history',
+    linkActiveClass: 'font-weight-bold text-decoration-none',
     routes: [
         {
             path: '/',

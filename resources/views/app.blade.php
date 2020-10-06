@@ -21,10 +21,18 @@
 </head>
 <body>
     <main id="app">
-        <Navigation></Navigation>
-        <div class="py-4">
-        <router-view><router-view>
-        </div>
+            <Navigation></Navigation>
+            <div class="py-4">
+                <div class="container-fluid">
+                    <div class="row">
+                        <Side></Side>
+                        <div class="col-md-10 main-content p-5">
+                            <router-view><router-view>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
        <!-- <div class="py-4">
             <div class="container-fluid">
                 <div class="row">
