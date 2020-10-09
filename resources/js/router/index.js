@@ -1,6 +1,6 @@
 
-import Home from '../views/Home.vue'
-import About from '../views/About.vue'
+import List from '../views/admin/user/List.vue'
+import About from '../views/admin/user/About.vue'
 
 
 export default{
@@ -9,12 +9,14 @@ export default{
     routes: [
         {
             path: '/',
-            name: 'home',
-            component: Home,
+            name: 'list',
+            label:'Dashboard',
+            component: List,
         },
         {
             path: '/about',
             name: 'about',
+            label:'Laporan',
             component: About,
         },
     ]
