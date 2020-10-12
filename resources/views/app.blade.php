@@ -26,7 +26,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <Side></Side>
-                        <div class="col-md-10 main-content p-5">
+                        <div class="col-md-10 main-content ">
                             <router-view><router-view>
                         </div>
 

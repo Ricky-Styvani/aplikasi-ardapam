@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\dashboard;
+namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
+use App\Models\Karyawan;
 use Illuminate\Http\Request;
 
-class DashboardController extends Controller
+class KaryawanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        
+        //
     }
 
     /**
@@ -41,10 +42,10 @@ class DashboardController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Karyawan  $karyawan
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Karyawan $karyawan)
     {
         //
     }
@@ -52,10 +53,10 @@ class DashboardController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Karyawan  $karyawan
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Karyawan $karyawan)
     {
         //
     }
@@ -64,10 +65,10 @@ class DashboardController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Karyawan  $karyawan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Karyawan $karyawan)
     {
         //
     }
@@ -75,10 +76,10 @@ class DashboardController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Karyawan  $karyawan
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Karyawan $karyawan)
     {
         //
     }

@@ -1,23 +1,24 @@
 
-import List from '../views/admin/user/List.vue'
-import About from '../views/admin/user/About.vue'
+import List from '../views/admin/users/karyawan/List.vue'
+import Form from '../views/admin/users/karyawan/Form.vue'
 
 
 export default{
     mode: 'history',
     linkActiveClass: 'font-weight-bold text-decoration-none',
     routes: [
-        {
-            path: '/',
-            name: 'list',
-            label:'Dashboard',
-            component: List,
-        },
-        {
-            path: '/about',
-            name: 'about',
-            label:'Laporan',
-            component: About,
-        },
+                {
+                path: '/karyawan',
+                name: 'list',
+                label:'Karyawan',
+                component: List,
+            },
+           {
+                path: '/karyawan/form',
+                name: 'karyawan',
+                component: Form,
+            },
+            
+       
     ]
 }

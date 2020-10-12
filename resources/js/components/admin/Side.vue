@@ -1,5 +1,5 @@
 <template>
-<div class="col-md-2">
+<div class="col-md-2" id="side">
     <ul class="list-group list-group-flush shadow-sm border-0 ">
         <li v-for="route of routes" class="list-group-item" id="app">
             <router-link exact  :key="route.path" :to= "route.path" class= " text-dark text-decoration-none">{{route.label}}</router-link>   
@@ -49,3 +49,10 @@ export default {
    }
 }
 </script>
+<style>
+    @media (max-width: 767.98px) {
+        #side{
+            display:none;
+        }
+    }
+</style>
