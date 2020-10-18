@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Users;
 
-use App\Http\Controllers\Controller;
 use App\Models\Karyawan;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\KaryawanResource;
 
 class KaryawanController extends Controller
 {
@@ -15,7 +16,23 @@ class KaryawanController extends Controller
      */
     public function index()
     {
-        //
+        $request = Karyawan::latest()->get();
+        return KaryawanResource::collection($request);
+           
+        /*   return response()->json(Karyawan::all()); return karyawan::latest()->get(); $q = $request->input('q'); Request $request, Karyawan $karyawans
+
+        $karyawans = $karyawanss-> when($q, function($query) use ($q){
+                    return $query->where ('name','like','%'.$q.'%')
+                                ->orWhere ('email','like','%'.$q.'%');
+                })
+                ->paginate(10);
+        $request = $request->all();
+        return view('dashboard/user/list',[
+            'users'     => $users,
+            'request'   => $request,
+            'active'    => $active
+         ]);
+         */
     }
 
     /**
