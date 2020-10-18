@@ -8,14 +8,14 @@ export default{
     linkActiveClass: 'font-weight-bold text-decoration-none',
     routes: [
                 {
-                path: '/karyawan',
+                path: '/karyawans',
                 name: 'list',
                 label:'Karyawan',
                 component: List,
             },
            {
-                path: '/karyawan/form',
-                name: 'karyawan',
+                path: '/karyawans/form',
+                name: 'form',
                 component: Form,
             },
             

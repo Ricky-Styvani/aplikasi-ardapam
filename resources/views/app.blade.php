@@ -20,8 +20,9 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <main id="app">
-            <Navigation></Navigation>
+
+    <div id="app">
+        <!--    <Navigation></Navigation>
             <div class="py-4">
                 <div class="container-fluid">
                     <div class="row">
@@ -33,6 +34,7 @@
                     </div>
                 </div>
             </div>
+            -->
        <!-- <div class="py-4">
             <div class="container-fluid">
                 <div class="row">
@@ -46,7 +48,7 @@
             </div>
         </div>  -->
 
-    </main>
+    </div>
     <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

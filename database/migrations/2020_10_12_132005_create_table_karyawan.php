@@ -13,7 +13,7 @@ class CreateTableKaryawan extends Migration
      */
     public function up()
     {
-        Schema::create('Karyawan', function (Blueprint $table) {
+        Schema::create('Karyawans', function (Blueprint $table) {
             $table->id();
             $table->integer('id_karyawan');
             $table->string('name');

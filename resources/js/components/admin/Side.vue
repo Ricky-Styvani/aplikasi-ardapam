@@ -1,8 +1,8 @@
 <template>
 <div class="col-md-2" id="side">
-    <ul class="list-group list-group-flush shadow-sm border-0 ">
-        <li v-for="route of routes" class="list-group-item" id="app">
-            <router-link exact  :key="route.path" :to= "route.path" class= " text-dark text-decoration-none">{{route.label}}</router-link>   
+    <ul class="list-group list-group-flush shadow-sm border-0 " id="app" >
+        <li v-for="route of routes" :key="route.path" class="list-group-item">
+            <router-link exact  :to="route.path" class= " text-dark text-decoration-none">{{route.label}}</router-link>   
         </li>
         
        <!-- 
@@ -27,21 +27,7 @@
 <script>
 import axios from 'axios'
 export default {
-   /* data(){
-        return{
-            menu:[
-                {
-                label:'Dashboard',
-                path:'/'},
-                {
-                label:'Laporan',
-                path:'/about'
-                },
-                {label:'Users'},  
-            ],
-        }
-    }*/
-    
+    Name: 'Side',
    data(){
        return{
            routes:this.$router.options.routes
