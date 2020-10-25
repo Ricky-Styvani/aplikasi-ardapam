@@ -14,11 +14,9 @@ export default{
                 component: List,
             },
            {
-                path: '/karyawans/form',
-                name: 'form',
+                path: '/karyawans/create',
+                name: 'create',
                 component: Form,
             },
-            
-       
     ]
 }

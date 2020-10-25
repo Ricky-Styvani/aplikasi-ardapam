@@ -19,3 +19,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('karyawans', 'Users\KaryawanController@index');
+    Route::group(['prefix' => 'karyawans'], function () {
+            Route::post('create', 'Users\KaryawanController@store');
+            Route::get('edit/{id}', 'Users\KaryawanController@edit');
+            Route::post('update/{id}', 'Users\KaryawanController@update');
+            Route::delete('delete/{id}', 'Users\KaryawanController@delete');
+    });
+
+    Route::group(['prefix' => 'levels'], function () {
+        Route::get('', 'Users\levelController@index');
+    });

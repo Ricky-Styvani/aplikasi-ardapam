@@ -1,5 +1,6 @@
 require('./bootstrap');
 window.Vue = require('vue');
+import FontAwesomeIcon from '@fortawesome/fontawesome-free'
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import axios from 'axios';
@@ -7,8 +8,9 @@ import VueAxios from 'vue-axios';
 import routes from './router'
 import App from './components/admin/App.vue';
 
-Vue.use(VueRouter,VueAxios);
+window.Vue.use(VueRouter,VueAxios);
 Vue.prototype.axios = axios;
+Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 
 //Vue.component('navigation', require('./components/admin/Navigation.vue').default);

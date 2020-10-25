@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid">
+  <div class="container-fluid p-0">
     <Navigation></Navigation>
             <div class="py-4">
                 <div class="container-fluid">

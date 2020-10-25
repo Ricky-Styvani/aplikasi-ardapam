@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Users;
 
-use App\Models\Karyawan;
+use App\Models\{Karyawan,Level};
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\KaryawanResource;
+
 
 class KaryawanController extends Controller
 {
@@ -53,7 +54,23 @@ class KaryawanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       
+        $level= Level::findOrFail(request('level'));
+       $request= Karyawan::create([
+            'id_karyawan' =>request ('id_karyawan'),
+            'name' => request('name'),
+            'password' => request('password'),
+            'level' => $level->id,
+            'no_telp' => request('no_telp'),
+            
+        ]);
+
+        return response()->json([
+            'massage'=>'your create',
+            'request'=>$request,
+        ]);
+        
+
     }
 
     /**

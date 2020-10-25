@@ -1,9 +1,5 @@
 <template>
    <div class="card mt-0">
-        <div class="mb-2 p-3">
-            <a href="" class="btn btn-primary btn-sm">+ Karyawan
-            </a>
-        </div>
         <div class="card-header">
             <div class="row">
                 <div class="col-8 align-self-center pd-4">
@@ -22,6 +18,10 @@
                     </form>
                 </div>
             </div>
+        </div>
+        <div class="mb-2 p-3">
+            
+            <router-link to="/karyawans/create" class="btn btn-primary btn-sm">+ Karyawan</router-link>
         </div>
         <div class="card-body p-0">
                 <table class="table table-borderless table-striped table-hover">
@@ -42,7 +42,7 @@
                             <td>{{ item.name }}</td>
                             <td>{{ item.no_telp }}</td>
                             <td>{{ item.level }}</td>
-                            <td>{{ item.edited_at }}</td>
+                            <td>{{ item.updated_at }}</td>
                             <td style="text-align: center">
                                 <router-link :to="'/karyawans/form'+item.id" tag="button" class="btn btn-warning btn-sm">Edit</router-link>
                             </td> 
