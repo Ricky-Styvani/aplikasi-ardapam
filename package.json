@@ -26,6 +26,7 @@
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.15.1",
         "vue-axios": "^3.0.1",
-        "vue-router": "^3.4.5"
+        "vue-router": "^3.4.5",
+        "vue-toasted": "^1.1.28"
     }
 }

@@ -7,7 +7,9 @@ import axios from 'axios';
 import VueAxios from 'vue-axios';
 import routes from './router'
 import App from './components/admin/App.vue';
-
+import Toasted from 'vue-toasted';
+ 
+Vue.use(Toasted);
 window.Vue.use(VueRouter,VueAxios);
 Vue.prototype.axios = axios;
 Vue.component('font-awesome-icon', FontAwesomeIcon)

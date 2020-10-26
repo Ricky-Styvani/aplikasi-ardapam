@@ -6,6 +6,7 @@ use App\Models\{Karyawan,Level};
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\KaryawanResource;
+use Validator;
 
 
 class KaryawanController extends Controller
@@ -20,7 +21,8 @@ class KaryawanController extends Controller
         $request = Karyawan::latest()->get();
         return KaryawanResource::collection($request);
            
-        /*   return response()->json(Karyawan::all()); return karyawan::latest()->get(); $q = $request->input('q'); Request $request, Karyawan $karyawans
+        /*   return response()->json(Karyawan::all()); return karyawan::latest()->get();
+         $q = $request->input('q'); Request $request, Karyawan $karyawans
 
         $karyawans = $karyawanss-> when($q, function($query) use ($q){
                     return $query->where ('name','like','%'.$q.'%')
@@ -54,7 +56,26 @@ class KaryawanController extends Controller
      */
     public function store(Request $request)
     {
+       /* $validator = VALIDATOR::make($request->all(), [
+            'id_karyawan' => 'required',
+            'name' => 'required',
+            'password' => 'required',
+            'level' => 'required',
+            'id_karyawan' => 'required',
+
+        ]);
+        */
        
+        request()->validate([
+            'id_karyawan' => 'required',
+            'name' => 'required',
+            'password' => 'required',
+            'level' => 'required',
+            'no_telp' => 'required',
+
+        ]);
+        
+
         $level= Level::findOrFail(request('level'));
        $request= Karyawan::create([
             'id_karyawan' =>request ('id_karyawan'),
@@ -66,7 +87,7 @@ class KaryawanController extends Controller
         ]);
 
         return response()->json([
-            'massage'=>'your create',
+            'massage'=>'your create karyawan success',
             'request'=>$request,
         ]);
         

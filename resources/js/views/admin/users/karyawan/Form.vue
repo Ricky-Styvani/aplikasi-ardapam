@@ -15,6 +15,7 @@
                 </div>
             </div>
         </div>
+        
         <div class="card-body">
            <div class="row">
             <div class="col-md-8 offset-md-2">
@@ -23,25 +24,23 @@
                                 <label for="nama">Id karyawan</label>
                                 <input type="text" class="form-control" v-model="form.id_karyawan" value="level.level">
                             
-                                    <span class="text-danger"></span>
+                                    <span v-if="theErrors.id_karyawan" class=" text-danger">{{theErrors.id_karyawan[0]}}</span>
                             
                      </div>
                     <div class="form-group">
                         <label for="nama">Nama</label>
                         <input type="text" class="form-control" v-model="form.name" value="">
                        
-                            <span class="text-danger"></span>
+                             <span v-if="theErrors.name" class=" text-danger">{{theErrors.name[0]}}</span>
                        
                     </div>
-
-                     
 
 
                     <div class="form-group">
                         <label for="password">Password</label>
                         <input type="password" class="form-control" v-model="form.password" value="">
-                       
-                            <span class="text-danger"></span>
+                             
+                             <span v-if="theErrors.password" class=" text-danger">{{theErrors.password[0]}}</span>
                        
                     </div>
                     
@@ -53,14 +52,14 @@
                         </option>
                         
                         </select>
+                        <span v-if="theErrors.level" class=" text-danger">{{theErrors.level[0]}}</span>
                     </div>
 
                      <div class="form-group">
-                        <label for="no">No_telphone</label>
+                        <label for="no">No.telphone</label>
                         <input type="text" class="form-control" v-model="form.no_telp" value="">
                        
-                            <span class="text-danger"></span>
-                       
+                             <span v-if="theErrors.no_telp" class=" text-danger">{{theErrors.no_telp[0]}}</span>
                     </div>
                     
                     
@@ -109,7 +108,9 @@ export default {
                 level:'',
                 no_telp:'',
             },
-            levels : []
+            levels : [],
+            theErrors :[],
+          
         };
     },
     mounted(){
@@ -118,22 +119,38 @@ export default {
 
     methods:{
             async store() {
-               let response= await axios.post('http://127.0.0.1:8000/api/karyawans/create', this.form)
+                try{
+                        let response= await axios.post('http://127.0.0.1:8000/api/karyawans/create', this.form)
 
-               if(response.status==200){
-                   console.log(response.data);
-               }
+                        if(response.status==200){
+                                this.form.name = ""
+                                this.form.id_karyawan = ""
+                                this.form.password = ""
+                                this.form.level = ""
+                                this.form.no_telp = ""
+                                this.theerrors = []
+                                this.$toasted.show(response.data.massage,{
+                                    position:'top-center',
+                                    type: 'success',
+                                    duration:3000,
+                                });
+                        }
+                       
+                }catch(e){
+                     this.$toasted.show("something went wrong.",{
+                            position:'top-center',
+                            type: 'error',
+                            duration:3000,
+                        });
+                    this.theErrors= e.response.data.errors;
+                }
             },
 
-        getData() {
-                axios.get('http://127.0.0.1:8000/api/levels')
-                .then( response => {
+        async getData() {
+                let response= await axios.get('http://127.0.0.1:8000/api/levels')
+                if(response.status==200) {
                      this.levels = response.data
-                     console.log(response.status);
-                })
-                .then((error)=>{
-                    console.log(error)
-                });
+                };
         }
     }
     
