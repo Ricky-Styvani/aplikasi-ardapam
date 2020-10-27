@@ -44,7 +44,7 @@
                             <td>{{ item.level }}</td>
                             <td>{{ item.updated_at }}</td>
                             <td style="text-align: center">
-                                <router-link :to="'/karyawans/form'+item.id" tag="button" class="btn btn-warning btn-sm">Edit</router-link>
+                                <router-link :to="{name:'karyawans.edit', params: {karyawanName: item.name}}" tag="button" class="btn btn-warning btn-sm">Edit</router-link>
                             </td> 
                         </tr>
                     </tbody>

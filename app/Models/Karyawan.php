@@ -14,6 +14,7 @@ class Karyawan extends Model
     protected $guarded=[];
     //use AutoNumberTrait;
 
+    
     public function level(){
         return $this->belongsTo(Level::class);
     }

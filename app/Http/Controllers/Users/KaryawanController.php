@@ -18,7 +18,7 @@ class KaryawanController extends Controller
      */
     public function index()
     {
-        $request = Karyawan::latest()->get();
+        $request = Karyawan::with('level')->latest()->get();
         return KaryawanResource::collection($request);
            
         /*   return response()->json(Karyawan::all()); return karyawan::latest()->get();
@@ -81,7 +81,7 @@ class KaryawanController extends Controller
             'id_karyawan' =>request ('id_karyawan'),
             'name' => request('name'),
             'password' => request('password'),
-            'level' => $level->id,
+            'level_id' => $level->id,
             'no_telp' => request('no_telp'),
             
         ]);
@@ -102,7 +102,7 @@ class KaryawanController extends Controller
      */
     public function show(Karyawan $karyawan)
     {
-        //
+        return KaryawanResource::make($karyawan);
     }
 
     /**
@@ -125,7 +125,30 @@ class KaryawanController extends Controller
      */
     public function update(Request $request, Karyawan $karyawan)
     {
-        //
+        request()->validate([
+            'id_karyawan' => 'required',
+            'name' => 'required',
+            'password' => 'required',
+            'level' => 'required',
+            'no_telp' => 'required',
+
+        ]);
+        $level= Level::findOrFail(request('level'));
+        $karyawan->update([
+            'id_karyawan' =>request ('id_karyawan'),
+            'name' => request('name'),
+            'password' => request('password'),
+            'level_id' => $level->id,
+            'no_telp' => request('no_telp'),
+            
+        ]);
+
+        return response()->json([
+            'massage'=>'your update karyawan success',
+            'request'=>$request,
+        ]);
+
+
     }
 
     /**

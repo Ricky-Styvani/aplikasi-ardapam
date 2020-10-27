@@ -19,7 +19,7 @@
         <div class="card-body">
            <div class="row">
             <div class="col-md-8 offset-md-2">
-                <form  method="post" action="#" @submit.prevent="store" enctype="multipart/form-data">
+                <form  method="post" action="#" @submit.prevent="update" enctype="multipart/form-data">
                     <div class="form-group">
                                 <label for="nama">Id karyawan</label>
                                 <input type="text" class="form-control" v-model="form.id_karyawan" value="level.level">
@@ -46,10 +46,15 @@
                     
                      <div class="form-group">
                         <label for="level">Level</label>
-                        <select class="form-control" v-model="form.level" id="exampleFormControlSelect1">
-                        <option v-for="item in levels" :key="item.id" v-bind:value="item.id">
-                            {{item.level}}
-                        </option>
+
+                        <select class="form-control" @change="selectedLevel"  id="exampleFormControlSelect1"> 
+                            <option :value="form.level_id" v-text="form.level"></option>
+                        
+                            <template v-for="item in levels" >
+                                <option v-if="form.level_id !== item.id" :key="item.id" :value="item.id">
+                                    {{item.level}}
+                                </option>
+                            </template>
                         
                         </select>
                         <span v-if="theErrors.level" class=" text-danger">{{theErrors.level[0]}}</span>
@@ -65,7 +70,7 @@
                     
                     <div class="form-group mb-0">
                         <button type="button" class="btn btn-secondary btn-sm">Cencel</button>
-                        <button type="submit" class="btn btn-success btn-sm">Create</button>
+                        <button type="submit" class="btn btn-success btn-sm">Update</button>
                     </div>
                 </form>
             </div>
@@ -98,53 +103,22 @@
 
 <script>
 export default {
-    name:"Form",
+    name:"Edit",
     data () {
         return {
-            form:{
-                name:'',
-                id_karyawan:'',
-                password:'',
-                level:'',
-                no_telp:'',
-            },
+            form:[],
             levels : [],
             theErrors :[],
+            selected:'',
           
         };
     },
     mounted(){
         this.getData();
+        this.getKaryawan();
     },
 
     methods:{
-            async store() {
-                try{
-                        let response= await axios.post('http://127.0.0.1:8000/api/karyawans/create', this.form)
-
-                        if(response.status==200){
-                                this.form.name = ""
-                                this.form.id_karyawan = ""
-                                this.form.password = ""
-                                this.form.level = ""
-                                this.form.no_telp = ""
-                                this.theerrors = []
-                                this.$toasted.show(response.data.massage,{
-                                    position:'top-center',
-                                    type: 'success',
-                                    duration:3000,
-                                });
-                        }
-                       
-                }catch(e){
-                     this.$toasted.show("something went wrong.",{
-                            position:'top-center',
-                            type: 'error',
-                            duration:3000,
-                        });
-                    this.theErrors= e.response.data.errors;
-                }
-            },
 
         async getData() {
                 let response= await axios.get('http://127.0.0.1:8000/api/levels')
@@ -153,6 +127,31 @@ export default {
                 };
         },
 
+        async getKaryawan(){
+            let response= await axios.get(`http://127.0.0.1:8000/api/karyawans/${this.$route.params.karyawanName}`);
+            this.form=response.data.data
+        },
+
+        selectedLevel(e){
+            this.selected = e.target.value
+        },
+
+        async update(){
+            
+            this.form['level'] = this.selected || this.form.level_id
+
+            let response= await axios.patch(`http://127.0.0.1:8000/api/karyawans/${this.$route.params.karyawanName}/edit`, this.form);
+
+             if(response.status==200){
+
+                 this.$toasted.show(response.data.massage,{
+                                    position:'top-center',
+                                    type: 'success',
+                                    duration:3000,
+                                });
+                this.$router.push('/karyawans')
+             }
+        }
     }
     
 

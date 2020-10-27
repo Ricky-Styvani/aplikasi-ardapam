@@ -18,10 +18,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('karyawans', 'Users\KaryawanController@index');
     Route::group(['prefix' => 'karyawans'], function () {
             Route::post('create', 'Users\KaryawanController@store');
-            Route::get('edit/{id}', 'Users\KaryawanController@edit');
+            Route::get('', 'Users\KaryawanController@index');
+            Route::get('{karyawan:name}', 'Users\KaryawanController@show')->name('karyawans.show');
+            Route::patch('{karyawan:name}/edit', 'Users\KaryawanController@update');
             Route::post('update/{id}', 'Users\KaryawanController@update');
             Route::delete('delete/{id}', 'Users\KaryawanController@delete');
     });
