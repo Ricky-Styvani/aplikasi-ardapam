@@ -10,7 +10,7 @@
                 </div>
                 <div class="col-4 text-right">
                   <button class="btn btn-sm text-secondary" data-toggle="modal" data-target="#deletemodal">
-                        <i class="fas fa-trash"></i>
+                        <v-icon name="trash-alt"></v-icon>
                     </button>
                 </div>
             </div>
@@ -69,7 +69,7 @@
                     
                     
                     <div class="form-group mb-0">
-                        <button type="button" class="btn btn-secondary btn-sm">Cencel</button>
+                        <router-link  to= "/karyawans" tag="button" class="btn btn-secondary btn-sm">Cencel</router-link>
                         <button type="submit" class="btn btn-success btn-sm">Update</button>
                     </div>
                 </form>
@@ -89,9 +89,9 @@
                     <p>Anda yakin ingin hapus Karyawan</p>
                 </div>
                 <div class="modal-footer">
-                    <form action="" method="post">
+                    <form action="#" method="post" @submit.prevent="deleteKaryawan">
                    
-                        <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Delete</button>
+                        <button class="btn btn-sm btn-danger" > <v-icon name="trash-alt"></v-icon> Delete</button>
                     </form>
                 </div>
             </div>
@@ -149,7 +149,21 @@ export default {
                                     type: 'success',
                                     duration:3000,
                                 });
-                this.$router.push('/karyawans')
+                this.$router.push('/karyawans');
+             }
+        },
+        async deleteKaryawan(){
+            let response = await axios.delete(`http://127.0.0.1:8000/api/karyawans/${this.$route.params.karyawanName}/delete`);
+             if(response.status==200){
+
+                 this.$toasted.show(response.data.massage,{
+                                    position:'top-center',
+                                    type: 'success',
+                                    duration:3000,
+                                });
+                $('.modal-backdrop').hide();
+                this.$router.push('/karyawans');
+
              }
         }
     }

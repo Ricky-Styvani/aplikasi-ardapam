@@ -65,7 +65,7 @@ class KaryawanController extends Controller
 
         ]);
         */
-       
+       sleep(1);
         request()->validate([
             'id_karyawan' => 'required',
             'name' => 'required',
@@ -159,6 +159,11 @@ class KaryawanController extends Controller
      */
     public function destroy(Karyawan $karyawan)
     {
-        //
+        $karyawan->delete();
+
+        return response()->json([
+            'massage'=>'your delete karyawan success',
+
+        ], 200);
     }
 }

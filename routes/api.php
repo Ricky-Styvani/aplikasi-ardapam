@@ -23,8 +23,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
             Route::get('', 'Users\KaryawanController@index');
             Route::get('{karyawan:name}', 'Users\KaryawanController@show')->name('karyawans.show');
             Route::patch('{karyawan:name}/edit', 'Users\KaryawanController@update');
-            Route::post('update/{id}', 'Users\KaryawanController@update');
-            Route::delete('delete/{id}', 'Users\KaryawanController@delete');
+            Route::delete('{karyawan:name}/delete', 'Users\KaryawanController@destroy');
+           
+            
     });
 
     Route::group(['prefix' => 'levels'], function () {

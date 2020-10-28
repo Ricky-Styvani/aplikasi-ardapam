@@ -8,11 +8,14 @@ import VueAxios from 'vue-axios';
 import routes from './router'
 import App from './components/admin/App.vue';
 import Toasted from 'vue-toasted';
- 
+import 'vue-awesome/icons'
+import Icon from 'vue-awesome/components/Icon'
+
+Vue.component('v-icon', Icon);
 Vue.use(Toasted);
 window.Vue.use(VueRouter,VueAxios);
 Vue.prototype.axios = axios;
-Vue.component('font-awesome-icon', FontAwesomeIcon)
+
 
 
 //Vue.component('navigation', require('./components/admin/Navigation.vue').default);

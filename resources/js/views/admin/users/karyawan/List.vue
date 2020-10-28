@@ -23,7 +23,7 @@
             
             <router-link to="/karyawans/create" class="btn btn-primary btn-sm">+ Karyawan</router-link>
         </div>
-        <div class="card-body p-0">
+        <div class="card-body p-2">
                 <table class="table table-borderless table-striped table-hover">
                     <thead>
                         <tr >
@@ -43,8 +43,8 @@
                             <td>{{ item.no_telp }}</td>
                             <td>{{ item.level }}</td>
                             <td>{{ item.updated_at }}</td>
-                            <td style="text-align: center">
-                                <router-link :to="{name:'karyawans.edit', params: {karyawanName: item.name}}" tag="button" class="btn btn-warning btn-sm">Edit</router-link>
+                            <td >
+                                <router-link :to="{name:'karyawans.edit', params: {karyawanName: item.name}}" tag="button" class="btn btn-success btn-sm">Edit</router-link>
                             </td> 
                         </tr>
                     </tbody>

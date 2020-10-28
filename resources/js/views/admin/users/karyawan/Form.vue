@@ -8,11 +8,6 @@
                         Karyawan
                     </h3>
                 </div>
-                <div class="col-4 text-right">
-                  <button class="btn btn-sm text-secondary" data-toggle="modal" data-target="#deletemodal">
-                        <i class="fas fa-trash"></i>
-                    </button>
-                </div>
             </div>
         </div>
         
@@ -63,33 +58,18 @@
                     </div>
                     
                     
-                    <div class="form-group mb-0">
-                        <button type="button" class="btn btn-secondary btn-sm">Cencel</button>
-                        <button type="submit" class="btn btn-success btn-sm">Create</button>
+                    <div class="form-group mr-5 d-flex">
+                        <router-link  to= "/karyawans" tag="button" class="btn btn-secondary btn-sm">Cencel</router-link>
+                        <button type="submit" class="btn btn-primary btn-sm d-flex align-items-center">
+                            Create
+                            <template v-if="loading">
+                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; background: none; display: block; shape-rendering: auto;" width="20px" height="20px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid"> <g transform="rotate(0 50 50)">   <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#1d3f72">     <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.9166666666666666s" repeatCount="indefinite"></animate>   </rect> </g><g transform="rotate(30 50 50)">   <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#1d3f72">     <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.8333333333333334s" repeatCount="indefinite"></animate>   </rect> </g><g transform="rotate(60 50 50)">   <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#1d3f72">     <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.75s" repeatCount="indefinite"></animate>   </rect> </g><g transform="rotate(90 50 50)">   <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#1d3f72">     <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.6666666666666666s" repeatCount="indefinite"></animate>   </rect> </g><g transform="rotate(120 50 50)">   <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#1d3f72">     <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.5833333333333334s" repeatCount="indefinite"></animate>   </rect> </g><g transform="rotate(150 50 50)">   <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#1d3f72">     <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.5s" repeatCount="indefinite"></animate>   </rect> </g><g transform="rotate(180 50 50)">   <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#1d3f72">     <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.4166666666666667s" repeatCount="indefinite"></animate>   </rect> </g><g transform="rotate(210 50 50)">   <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#1d3f72">     <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.3333333333333333s" repeatCount="indefinite"></animate>   </rect> </g><g transform="rotate(240 50 50)">   <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#1d3f72">     <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.25s" repeatCount="indefinite"></animate>   </rect> </g><g transform="rotate(270 50 50)">   <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#1d3f72">     <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.16666666666666666s" repeatCount="indefinite"></animate>   </rect> </g><g transform="rotate(300 50 50)">   <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#1d3f72">     <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.08333333333333333s" repeatCount="indefinite"></animate>   </rect> </g><g transform="rotate(330 50 50)">   <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#1d3f72">     <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="0s" repeatCount="indefinite"></animate>   </rect> </g> </svg>
+                            </template>
+                            </button>
                     </div>
                 </form>
             </div>
            </div>
-        </div>
-    </div>
-    
-    <div class="modal fade" id="deletemodal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5>Delete</h5>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <p>Anda yakin ingin hapus Karyawan</p>
-                </div>
-                <div class="modal-footer">
-                    <form action="" method="post">
-                   
-                        <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Delete</button>
-                    </form>
-                </div>
-            </div>
         </div>
     </div>
   
@@ -108,6 +88,7 @@ export default {
                 level:'',
                 no_telp:'',
             },
+            loading: false,
             levels : [],
             theErrors :[],
           
@@ -119,6 +100,7 @@ export default {
 
     methods:{
             async store() {
+                this.loading= true;
                 try{
                         let response= await axios.post('http://127.0.0.1:8000/api/karyawans/create', this.form)
 
@@ -129,6 +111,7 @@ export default {
                                 this.form.level = ""
                                 this.form.no_telp = ""
                                 this.theerrors = []
+                                this.loading= false;
                                 this.$toasted.show(response.data.massage,{
                                     position:'top-center',
                                     type: 'success',
@@ -137,12 +120,14 @@ export default {
                         }
                        
                 }catch(e){
+                     this.loading= false;
                      this.$toasted.show("something went wrong.",{
                             position:'top-center',
                             type: 'error',
                             duration:3000,
                         });
                     this.theErrors= e.response.data.errors;
+                   
                 }
             },
 
