@@ -18,8 +18,9 @@ class KaryawanController extends Controller
      */
     public function index()
     {
-        $request = Karyawan::with('level')->latest()->get();
-        return KaryawanResource::collection($request);
+        $request = Karyawan::with('level')->latest()->paginate(4);
+        $resource =KaryawanResource::collection($request) ;
+        return $resource;
            
         /*   return response()->json(Karyawan::all()); return karyawan::latest()->get();
          $q = $request->input('q'); Request $request, Karyawan $karyawans
@@ -165,5 +166,16 @@ class KaryawanController extends Controller
             'massage'=>'your delete karyawan success',
 
         ], 200);
+    }
+
+    public function search(Request $request,Karyawan $karyawan){
+        $search = $request->get('q');
+        //return KarywanResource::collection(where('name','like','%'.$search.'%'))->get();
+        $post= when($search, function($query) use($search){
+            $query->where ('name','like','%'.$search.'%')
+                        ->orWhere ('id_karyawan','like','%'.$search.'%');
+        })->latest()-paginate(4);
+        
+        return KaryawanResource::collection($post);
     }
 }

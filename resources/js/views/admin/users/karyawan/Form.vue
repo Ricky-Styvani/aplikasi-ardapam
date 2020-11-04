@@ -33,7 +33,12 @@
 
                     <div class="form-group">
                         <label for="password">Password</label>
-                        <input type="password" class="form-control" v-model="form.password" value="">
+                        <div class="d-flex">
+                        <input :type="passwordField" id="password" name="password" v-model="form.password" class="form-control" data-toggle="password">
+                        <button type= "button" class="btn btn-secondary btn-sm" @click="showPassword"><v-icon :name="icon"></v-icon></button>
+                        </div> 
+            		
+                        
                              
                              <span v-if="theErrors.password" class=" text-danger">{{theErrors.password[0]}}</span>
                        
@@ -81,6 +86,9 @@ export default {
     name:"Form",
     data () {
         return {
+            password: '',
+            passwordField: 'password',
+            icon: 'eye-slash',
             form:{
                 name:'',
                 id_karyawan:'',
@@ -137,6 +145,18 @@ export default {
                      this.levels = response.data
                 };
         },
+        showPassword() {
+            
+            if(this.passwordField == 'password') {
+                this.passwordField = 'text'
+                this.icon = 'eye'
+            } else {
+                this.passwordField = 'password'
+                this.icon = 'eye-slash'
+            }
+            
+            
+        }
 
     }
     
