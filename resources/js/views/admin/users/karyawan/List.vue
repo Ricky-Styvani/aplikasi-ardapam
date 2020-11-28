@@ -10,9 +10,10 @@
                 <div class="col-4">
                     <form method="get" action="">
                         <div class="input-group">
-                            <input type="text" class="form-control form-control-sm" v-model="search"  value="">
+                            <input type="text" class="form-control form-control-sm" name="q"  placeholder="search" 
+                            >
                                 <div class="input-group-append">
-                                    <button type="submit" class="btn btn-secondary btn-sm" @click.prevent="searchKaryawan">Search</button>
+                                    <button type="submit" class="btn btn-secondary btn-sm">Search</button>
                                 </div>
                         </div>
                     </form>
@@ -24,7 +25,9 @@
             <router-link to="/karyawans/create" class="btn btn-primary btn-sm">+ Karyawan</router-link>
         </div>
         <div class="card-body p-2">
-                <table class="table table-borderless table-striped table-hover" id="my-table">
+            <v-table >
+            </v-table>
+               <!-- <table class="table table-borderless table-striped table-hover" id="my-table">
                     <thead>
                         <tr >
                             <th>#</th>
@@ -36,20 +39,8 @@
                             <th>&nbsp;</th>
                         </tr>
                     </thead>
-                    <tbody id="list" v-if="showSearch==true">
-                        <tr v-for="(item,index) in karyawans" :key="item.id">
-                            <th scope="row">{{ index+1}}</th>
-                            <td>{{ item.name }}</td>
-                            <td>{{ item.no_telp }}</td>
-                            <td>{{ item.level }}</td>
-                            <td>{{ item.updated_at }}</td>
-                            <td >
-                                <router-link :to="{name:'karyawans.edit', params: {karyawanName: item.name}}" tag="button" class="btn btn-success btn-sm">Edit</router-link>
-                            </td> 
-                        </tr>
-                    </tbody>
-                    <tbody id="list" v-if="showSearch==false">
-                        <tr v-for="(item,index) in karyawans" :key="item.id">
+                    <tbody id="list" >
+                        <tr v-for="(item,index) in filtered" :key="item.id">
                             <th scope="row">{{ index+1}}</th>
                             <td>{{ item.name }}</td>
                             <td>{{ item.no_telp }}</td>
@@ -61,10 +52,10 @@
                         </tr>
                     </tbody>
                 </table> 
-                <div class="row">
+                <div class="row" >
                     <div class="col-md-8">
                         <nav aria-label="Page navigation example">
-                            <ul class="pagination">
+                            <ul class="pagination" v-model=  >
                                 <li v-bind:class="{disabled:!pagination.first_link}" class="page-item"><a href="#" @click.prevent="getData(pagination.first_link)" class="page-link">&laquo;</a></li>
                                 <li v-bind:class="{disabled:!pagination.prev_link}" class="page-item"><a href="#" @click.prevent="getData(pagination.prev_link)" class="page-link">&lt;</a></li>
                                 <ul class="pagination" v-for=" n in pagination.last_page" v-bind:key="n" >
@@ -81,8 +72,10 @@
                         Total: {{pagination.total_page}}
                     </div>
 
-                </div>
+                </div> 
+                -->
         </div>
+       
     </div>
 </template>
 
@@ -92,9 +85,11 @@ export default {
     name: "List",
     data () {
         return {
-            karyawans : [],
-            pagination: {
-                        current_page: '',
+           // karyawans : [],
+            //meta: [],
+           /*pagination: {
+                      
+                        current_page: 1,
                         last_page: '',
                         from_page:  '',
                         to_page:  '',
@@ -105,25 +100,57 @@ export default {
                         prev_link: '',
                         next_link: '',
             },
-            showSearch: false,
-            search:''
+            search: ''
+            */
             
         };
     },
+    /*
     created() {
         this.getData();
-        //this.searchKaryawan();
+       
+    }, 
+    mounted(){
+        this.tabla();
+    },
+
+    computed:{
+        filtered:function(){
+                 let karyawans = this.karyawans;
+                if (this.search) {
+                karyawans = karyawans.filter((row) => {
+                    return Object.keys(row).some((key) => {
+                        return String(row[key]).toLowerCase().indexOf(this.search.toLowerCase()) > -1;
+                    })
+                });
+                
+
+               return this.karyawans.filter((item)=>{
+                return item.id_karyawan.match(this.search)|| item.name.match(this.search) || item.level.match(this.search)
+                 });
+            
+        }
+         filteredProjects() {
+            let projects = this.projects;
+            if (this.search) {
+                projects = projects.filter((row) => {
+                    return Object.keys(row).some((key) => {
+                        return String(row[key]).toLowerCase().indexOf(this.search.toLowerCase()) > -1;
+                    })
+                });
+            }
+            
     },
     
     
     methods: {
         async getData(page) {
+                 //let current_page = this.search == '' ? this.current_page:1
                 page = page || 'http://127.0.0.1:8000/api/karyawans'
                let response= await axios.get(page)
                 if(response.status==200) {
-                    this.karyawans = response.data.data;
-                    console.log(response);
-                    this.pagination = {
+                    this.karyawans = response.data.data,
+                    this.pagination =   {
                         current_page: response.data.meta.current_page,
                         last_page:  response.data.meta.last_page,
                         from_page:  response.data.meta.from,
@@ -134,28 +161,34 @@ export default {
                         last_link: response.data.links.last,
                         prev_link: response.data.links.prev,
                         next_link: response.data.links.next,
-                      };
-                        console.log(this.pagination);
-                }
-                console.log(response.status);
-                
-               
+                        per_page: response.data.meta.per_page,
+                        }
+                    }
+                   
+              },
+            resetPagination() {
+            this.pagination={
+                        current_page: '',
+                        last_page: '',
+                        from_page:  '',
+                        to_page:  '',
+                        total_page:  '',
+                        path_page:  '',
+                        first_link:  '',
+                        last_link: '',
+                        prev_link: '',
+                        next_link: '',
+            }
         },
-        searchKaryawan(){
-               axios.get('http://127.0.0.1:8000/api/karyawans/search?q='+this.search)
-               .then( response => {
-                     this.karyawans = response.data.data;
-                     this.search='';
-                     this.showSearch = true;
-                     console.log(this.karyawans);
-                     console.log(response.status);
-                })
-                .then((error)=>{
-                    console.log(error)
-                });
-        }
 
-    },
-};
+        
+
+                   
+        },
+        */
+       
+        
+
+    }
 </script>
 

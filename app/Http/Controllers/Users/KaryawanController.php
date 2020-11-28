@@ -16,27 +16,25 @@ class KaryawanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $request = Karyawan::with('level')->latest()->paginate(4);
-        $resource =KaryawanResource::collection($request) ;
+        $search = $request-> q;
+        $post = Karyawan::with('level')
+        ->when($search, function($post){
+            $post= $post->where('name','LIKE','%'.$search.'%')
+            ->orWhere ('id_karyawan','LIKE','%'.$search.'%')
+            ->orWhere ('level','LIKE','%'.$search.'%');
+        })->latest()->get();
+        $resource =KaryawanResource::collection($post);
         return $resource;
-           
-        /*   return response()->json(Karyawan::all()); return karyawan::latest()->get();
-         $q = $request->input('q'); Request $request, Karyawan $karyawans
+        
 
-        $karyawans = $karyawanss-> when($q, function($query) use ($q){
-                    return $query->where ('name','like','%'.$q.'%')
-                                ->orWhere ('email','like','%'.$q.'%');
-                })
-                ->paginate(10);
-        $request = $request->all();
-        return view('dashboard/user/list',[
-            'users'     => $users,
-            'request'   => $request,
-            'active'    => $active
-         ]);
-         */
+      /*  $post = Karyawan::with('level')->latest()->paginate(4);
+        $resource =KaryawanResource::collection($post) ;
+        return $resource;
+        */
+           
+        
     }
 
     /**
@@ -126,6 +124,7 @@ class KaryawanController extends Controller
      */
     public function update(Request $request, Karyawan $karyawan)
     {
+        sleep(1);
         request()->validate([
             'id_karyawan' => 'required',
             'name' => 'required',
@@ -169,13 +168,14 @@ class KaryawanController extends Controller
     }
 
     public function search(Request $request,Karyawan $karyawan){
-        $search = $request->get('q');
-        //return KarywanResource::collection(where('name','like','%'.$search.'%'))->get();
-        $post= when($search, function($query) use($search){
-            $query->where ('name','like','%'.$search.'%')
-                        ->orWhere ('id_karyawan','like','%'.$search.'%');
-        })->latest()-paginate(4);
-        
-        return KaryawanResource::collection($post);
+        $search = $request-> get('q');
+        $post = $karyawan->with('level')
+        ->whereHas($search, function($q) use($search){
+            $q->where('name','like','%'.$search.'%')
+            ->orWhere ('id_karyawan','like','%'.$search.'%');
+        })->latest()->paginate(4);
+        $resource =KaryawanResource::collection($post) ;
+        return $resource;
     }
+    
 }

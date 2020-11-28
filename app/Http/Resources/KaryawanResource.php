@@ -24,6 +24,7 @@ class KaryawanResource extends JsonResource
             'level' => $this->level->slug,
             'updated_at' => $this->updated_at->format('d F, Y'),
             'link' => route('karyawans.show',$this->name),
+            'link' => route('karyawans.show',$this->id_karyawan),
         ];
         //parent::toArray($request);
     }

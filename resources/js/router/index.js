@@ -4,6 +4,7 @@ import Form from '../views/admin/users/karyawan/Form.vue'
 import Edit from '../views/admin/users/karyawan/Edit.vue'
 
 
+
 export default{
     mode: 'history',
     linkActiveClass: 'font-weight-bold text-decoration-none',

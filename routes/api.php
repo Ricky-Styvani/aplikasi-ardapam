@@ -24,7 +24,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
             Route::get('{karyawan:name}', 'Users\KaryawanController@show')->name('karyawans.show');
             Route::patch('{karyawan:name}/edit', 'Users\KaryawanController@update');
             Route::delete('{karyawan:name}/delete', 'Users\KaryawanController@destroy');
-            Route::get('/search', 'Users\KaryawanController@search');
 
            
             
@@ -32,4 +31,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
     Route::group(['prefix' => 'levels'], function () {
         Route::get('', 'Users\levelController@index');
+    });
+
+    Route::group(['prefix' => 'pelanggans'], function () {
+        Route::post('create', 'Users\KaryawanController@store');
+        Route::get('', 'Users\PelangganController@index');
+        Route::get('{karyawan:name}', 'Users\KaryawanController@show')->name('karyawans.show');
+        Route::patch('{karyawan:name}/edit', 'Users\KaryawanController@update');
+        Route::delete('{karyawan:name}/delete', 'Users\KaryawanController@destroy');
     });

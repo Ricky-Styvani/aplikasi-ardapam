@@ -1,8 +1,11 @@
 <template>
 <div class="col-md-2" id="side">
     <ul class="list-group list-group-flush shadow-sm border-0 " id="app" >
-        <li v-for="route of routes" :key="route.path" class="list-group-item">
-            <router-link exact  :to="route.path" class= " text-dark text-decoration-none">{{route.label}}</router-link>   
+        <li  class="list-group-item">
+            <router-link exact  to="/karyawans" class= " text-dark text-decoration-none">Karyawan</router-link>
+        </li>
+        <li  class="list-group-item">
+             <router-link exact  to="/pelanggans" class= " text-dark text-decoration-none">Pelanggan</router-link>   
         </li>
         
        <!-- 
@@ -30,7 +33,6 @@ export default {
     Name: 'Side',
    data(){
        return{
-           routes:this.$router.options.routes
        };
    }
 }
