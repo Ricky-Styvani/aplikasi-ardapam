@@ -29,10 +29,7 @@ class KaryawanController extends Controller
         return $resource;
         
 
-      /*  $post = Karyawan::with('level')->latest()->paginate(4);
-        $resource =KaryawanResource::collection($post) ;
-        return $resource;
-        */
+      
            
         
     }
@@ -55,15 +52,7 @@ class KaryawanController extends Controller
      */
     public function store(Request $request)
     {
-       /* $validator = VALIDATOR::make($request->all(), [
-            'id_karyawan' => 'required',
-            'name' => 'required',
-            'password' => 'required',
-            'level' => 'required',
-            'id_karyawan' => 'required',
-
-        ]);
-        */
+      
        sleep(1);
         request()->validate([
             'id_karyawan' => 'required',
@@ -167,15 +156,5 @@ class KaryawanController extends Controller
         ], 200);
     }
 
-    public function search(Request $request,Karyawan $karyawan){
-        $search = $request-> get('q');
-        $post = $karyawan->with('level')
-        ->whereHas($search, function($q) use($search){
-            $q->where('name','like','%'.$search.'%')
-            ->orWhere ('id_karyawan','like','%'.$search.'%');
-        })->latest()->paginate(4);
-        $resource =KaryawanResource::collection($post) ;
-        return $resource;
-    }
     
 }
