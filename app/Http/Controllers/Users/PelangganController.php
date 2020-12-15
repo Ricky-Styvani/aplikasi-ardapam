@@ -39,7 +39,31 @@ class PelangganController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        sleep(1);
+        request()->validate([
+            'id_pelanggan' => 'required',
+            'nama' => 'required',
+            'password' => 'required',
+            'no_telp' => 'required',
+            'id_alamat' => 'required',
+            'token'=> 'required',
+
+        ]);
+        
+       $request= Pelanggan::create([
+            'id_pelanggan' =>request ('id_pelanggan'),
+            'nama' => request('nama'),
+            'password' => request('password'),
+            'id_alamat' => request('id_alamat'),
+            'no_telp' => request('no_telp'),
+            'token' =>request ('token')
+            
+        ]);
+
+        return response()->json([
+            'massage'=>'your create pelanggan success',
+            'request'=>$request,
+        ]);
     }
 
     /**
@@ -50,7 +74,7 @@ class PelangganController extends Controller
      */
     public function show(Pelanggan $pelanggan)
     {
-        //
+        return PelangganResource::make($pelanggan);
     }
 
     /**
@@ -73,7 +97,30 @@ class PelangganController extends Controller
      */
     public function update(Request $request, Pelanggan $pelanggan)
     {
-        //
+        sleep(1);
+        request()->validate([
+            'id_pelanggan' => 'required',
+            'nama' => 'required',
+            'password' => 'required',
+            'no_telp' => 'required',
+            'id_alamat' => 'required',
+            'token'=> 'required',
+
+        ]);
+        $pelanggan->update([
+            'id_pelanggan' =>request ('id_pelanggan'),
+            'nama' => request('nama'),
+            'password' => request('password'),
+            'id_alamat' => request('id_alamat'),
+            'no_telp' => request('no_telp'),
+            'token' =>request ('token')
+            
+        ]);
+
+        return response()->json([
+            'massage'=>'your update pelanggan success',
+            'request'=>$request,
+        ]);
     }
 
     /**
@@ -84,6 +131,11 @@ class PelangganController extends Controller
      */
     public function destroy(Pelanggan $pelanggan)
     {
-        //
+        $pelanggan->delete();
+
+        return response()->json([
+            'massage'=>'your delete pelanggan success',
+
+        ], 200);
     }
 }

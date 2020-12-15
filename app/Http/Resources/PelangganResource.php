@@ -22,9 +22,9 @@ class PelangganResource extends JsonResource
             'password' => $this->password,
             'no_telp' => $this->no_telp,
             'id_alamat'=> $this->id_alamat,
-           // 'updated_at' => $this->updated_at->format('d F, Y'),
+            'updated_at' => $this->updated_at->format('d F, Y'),
             //'deleted_at' => $this->deleted_at->format('d F, Y'),
-           // 'link' => route('karyawans.show',$this->name),
+            'link' => route('pelanggans.show',$this->nama),
            // 'link' => route('karyawans.show',$this->id_karyawan),
         ];
         //return parent::toArray($request);
