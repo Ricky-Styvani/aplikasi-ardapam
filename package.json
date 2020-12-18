@@ -13,7 +13,7 @@
         "axios": "^0.19",
         "bootstrap": "^4.0.0",
         "cross-env": "^7.0",
-        "jquery": "^3.2",
+        "jquery": "^3.5.1",
         "laravel-mix": "^5.0.1",
         "lodash": "^4.17.19",
         "popper.js": "^1.12",
@@ -24,7 +24,15 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
-        "vue-axios": "^2.1.5",
-        "vue-route": "^1.5.1"
+        "@fortawesome/fontawesome-free": "^5.15.1",
+        "bootstrap-vue": "^2.18.1",
+        "datatables.net-bs4": "^1.10.22",
+        "datatables.net-buttons-bs4": "^1.6.5",
+        "jszip": "^3.5.0",
+        "pdfmake": "^0.1.68",
+        "vue-awesome": "^4.1.0",
+        "vue-axios": "^3.0.1",
+        "vue-router": "^3.4.5",
+        "vue-toasted": "^1.1.28"
     }
 }

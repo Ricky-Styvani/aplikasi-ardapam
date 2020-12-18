@@ -1,0 +1,169 @@
+<template>
+    <div class="container">
+             <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-8 align-self-center">
+                    <h3>
+                        Pelanggan
+                    </h3>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card-body">
+           <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <form  method="post" action="#" @submit.prevent="store" enctype="multipart/form-data">
+                    <div class="form-group">
+                                <label for="nama">Id pelanggan</label>
+                                <input type="text" class="form-control" v-model="form.id_pelanggan" value="">
+                            
+                                    <span v-if="theErrors.id_pelanggan" class=" text-danger">{{theErrors.id_pelanggan[0]}}</span>
+                            
+                     </div>
+                    <div class="form-group">
+                        <label for="nama">Nama</label>
+                        <input type="text" class="form-control" v-model="form.nama" value="">
+                       
+                             <span v-if="theErrors.nama" class=" text-danger">{{theErrors.nama[0]}}</span>
+                       
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <div class="d-flex">
+                        <input :type="passwordField" id="password" name="password" v-model="form.password" class="form-control" data-toggle="password">
+                        <button type= "button" class="btn btn-secondary btn-sm" @click="showPassword"><v-icon :name="icon"></v-icon></button>
+                        </div> 
+            		
+                        
+                             
+                             <span v-if="theErrors.password" class=" text-danger">{{theErrors.password[0]}}</span>
+                       
+                    </div>
+                    
+                     <div class="form-group">
+                        <label for="id_alamat">Rt</label>
+                        <select class="form-control" v-model="form.id_alamat" id="exampleFormControlSelect1">
+                        <option v-for="item in angka" :key="item.id" >
+                            {{item}}
+                        </option>
+                        
+                        </select>
+                        <span v-if="theErrors.id_alamat" class=" text-danger">{{theErrors.id_alamat[0]}}</span>
+                    </div>
+
+                     <div class="form-group">
+                        <label for="no">No.telphone</label>
+                        <input type="text" class="form-control" v-model="form.no_telp" value="">
+                       
+                             <span v-if="theErrors.no_telp" class=" text-danger">{{theErrors.no_telp[0]}}</span>
+                    </div>
+
+                     <div class="form-group">
+                        <label for="no">Token</label>
+                        <input type="text" class="form-control" v-model="form.token" value="">
+                       
+                             <span v-if="theErrors.token" class=" text-danger">{{theErrors.token[0]}}</span>
+                    </div>
+                    
+                    
+                    <div class="form-group mr-5 d-flex">
+                        <router-link  to= "/pelanggans" tag="button" class="btn btn-secondary btn-sm">Cencel</router-link>
+                        <button type="submit" class="btn btn-primary btn-sm d-flex align-items-center">
+                            Create
+                            <template v-if="loading">
+                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; background: none; display: block; shape-rendering: auto;" width="20px" height="20px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid"> <g transform="rotate(0 50 50)">   <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#1d3f72">     <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.9166666666666666s" repeatCount="indefinite"></animate>   </rect> </g><g transform="rotate(30 50 50)">   <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#1d3f72">     <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.8333333333333334s" repeatCount="indefinite"></animate>   </rect> </g><g transform="rotate(60 50 50)">   <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#1d3f72">     <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.75s" repeatCount="indefinite"></animate>   </rect> </g><g transform="rotate(90 50 50)">   <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#1d3f72">     <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.6666666666666666s" repeatCount="indefinite"></animate>   </rect> </g><g transform="rotate(120 50 50)">   <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#1d3f72">     <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.5833333333333334s" repeatCount="indefinite"></animate>   </rect> </g><g transform="rotate(150 50 50)">   <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#1d3f72">     <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.5s" repeatCount="indefinite"></animate>   </rect> </g><g transform="rotate(180 50 50)">   <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#1d3f72">     <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.4166666666666667s" repeatCount="indefinite"></animate>   </rect> </g><g transform="rotate(210 50 50)">   <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#1d3f72">     <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.3333333333333333s" repeatCount="indefinite"></animate>   </rect> </g><g transform="rotate(240 50 50)">   <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#1d3f72">     <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.25s" repeatCount="indefinite"></animate>   </rect> </g><g transform="rotate(270 50 50)">   <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#1d3f72">     <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.16666666666666666s" repeatCount="indefinite"></animate>   </rect> </g><g transform="rotate(300 50 50)">   <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#1d3f72">     <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.08333333333333333s" repeatCount="indefinite"></animate>   </rect> </g><g transform="rotate(330 50 50)">   <rect x="47" y="24" rx="3" ry="6" width="6" height="12" fill="#1d3f72">     <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="0s" repeatCount="indefinite"></animate>   </rect> </g> </svg>
+                            </template>
+                            </button>
+                    </div>
+                </form>
+            </div>
+           </div>
+        </div>
+    </div>
+  
+    </div>
+</template>
+
+<script>
+export default {
+    name:"FormPelanggan",
+    data () {
+        return {
+            password: '',
+            passwordField: 'password',
+            icon: 'eye-slash',
+            angka:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],
+            form:{
+                nama:'',
+                id_pelanggan:'',
+                password:'',
+                id_alamat:'',
+                no_telp:'',
+                token:'',
+            },
+            loading: false,
+            theErrors :[],
+          
+        };
+    },
+    mounted(){
+        
+    },
+
+    methods:{
+            async store() {
+                this.loading= true;
+                try{
+                        let response= await axios.post('http://127.0.0.1:8000/api/pelanggans/create', this.form)
+
+                        if(response.status==200){
+                                this.form.nama = ""
+                                this.form.id_pelanggan = ""
+                                this.form.password = ""
+                                this.form.id_alamat = ""
+                                this.form.no_telp = ""
+                                this.form.token = ""
+                                this.theerrors = []
+                                this.loading= false;
+                                this.$toasted.show(response.data.massage,{
+                                    position:'top-center',
+                                    type: 'success',
+                                    duration:3000,
+                                });
+                        }
+                       
+                }catch(e){
+                     this.loading= false;
+                     this.$toasted.show("something went wrong.",{
+                            position:'top-center',
+                            type: 'error',
+                            duration:3000,
+                        });
+                    this.theErrors= e.response.data.errors;
+                   
+                }
+            },
+
+        showPassword() {
+            
+            if(this.passwordField == 'password') {
+                this.passwordField = 'text'
+                this.icon = 'eye'
+            } else {
+                this.passwordField = 'password'
+                this.icon = 'eye-slash'
+            }
+            
+            
+        }
+
+    }
+    
+
+}
+</script>
+
