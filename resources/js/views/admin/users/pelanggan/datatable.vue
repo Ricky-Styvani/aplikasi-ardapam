@@ -71,9 +71,9 @@ methods:{
                 "text": 'copy',
                 "titleAttr" : "Copiar",
                 "className" : "btn btn-secondary btn-sm m-1",
-                "title": "Data Karyawan",
+                "title": "Data Pelanggan",
                 exportOptions: {
-                    columns: [ 0, 1, 2, 3 ]
+                    columns: [ 0, 1, 2, 3 ,4]
                 },
             },
              {
@@ -81,19 +81,19 @@ methods:{
                 "text": '<i class="fas fa-file-excel-o"></i> excel',
                 "titleAttr" : "exporter excel",
                 "className" : "btn btn-success btn-sm m-1",
-                "title": "Data Karyawan",
+                "title": "Data Pelanggan",
                 exportOptions: {
-                    columns: [ 0, 1, 2, 3 ]
+                    columns: [ 0, 1, 2, 3,4 ]
                 },
             } ,
             {
                 "extend": "print",
                 "text": "print",
                  exportOptions: {
-                    columns: [ 0, 1, 2, 3 ]
+                    columns: [ 0, 1, 2, 3, 4 ]
                 },
                 "className" : "btn btn-dark btn-sm m-1",
-                "title": "Data Karyawan",
+                "title": "Data Pelanggan",
                  pageSize: 'A4',
                  autoPrint: false,
                 customize: function ( win ) {

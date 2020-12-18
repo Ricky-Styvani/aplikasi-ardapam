@@ -11,27 +11,7 @@
                             <li  class="nav-item">
                                 <router-link exact   :to= "route.path" class= " text-dark text-decoration-none">{{route.label}}</router-link> 
                             </li>
-                            <!--<li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                users
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                    <a class="dropdown-item" href="#">Logout</a>
-
-                                </div>
-
-                            </li>
-                        
-                            <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Dropdown link
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="#">Logout</a>
-
-                            </div>
-                            </li>
-                            -->
+                            
                          </ul>
                 </div>
             </div>
