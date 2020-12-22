@@ -15,7 +15,7 @@ class CreateMeteransTable extends Migration
     {
         Schema::create('meterans', function (Blueprint $table) {
             $table->id();
-            $table->integer('token');
+            $table->foreignId('token');
             $table->Integer('meter_awal');
             $table->Integer('meter_akhir');
             $table->timestamps();

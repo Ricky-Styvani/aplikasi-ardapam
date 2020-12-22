@@ -15,8 +15,7 @@ class CreateTablePelanggan extends Migration
     {
         Schema::create('Pelanggans', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('id_pelanggan')->nullable();
-            $table->unsignedInteger('token')->nullable();
+            $table->integer('id_pelanggan');
             $table->string('nama');
             $table->string('password');
             $table->integer('no_telp');
