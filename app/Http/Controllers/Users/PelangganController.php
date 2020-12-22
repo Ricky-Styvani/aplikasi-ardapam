@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
-use App\Models\Pelanggan;
+use App\Models\{Pelanggan,Meteran};
 use Illuminate\Http\Request;
 use App\Http\Resources\PelangganResource;
 
@@ -46,19 +46,20 @@ class PelangganController extends Controller
             'password' => 'required',
             'no_telp' => 'required',
             'id_alamat' => 'required',
-            'token'=> 'required',
+            'token'=> 'required'
 
         ]);
         
-       $request= Pelanggan::create([
+       $request=Pelanggan::create([
             'id_pelanggan' =>request ('id_pelanggan'),
             'nama' => request('nama'),
             'password' => request('password'),
             'id_alamat' => request('id_alamat'),
             'no_telp' => request('no_telp'),
-            'token' =>request ('token')
-            
+            'token' =>request ('token'),
         ]);
+         
+       
 
         return response()->json([
             'massage'=>'your create pelanggan success',
