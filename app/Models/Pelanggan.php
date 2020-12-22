@@ -8,4 +8,5 @@ class Pelanggan extends Model
 {
     protected $table ='pelanggans';
     protected $guarded=[];
+    protected $primaryKey = "id_pelanggan";
 }
