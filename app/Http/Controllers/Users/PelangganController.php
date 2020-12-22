@@ -50,6 +50,7 @@ class PelangganController extends Controller
 
         ]);
         
+
        $request=Pelanggan::create([
             'id_pelanggan' =>request ('id_pelanggan'),
             'nama' => request('nama'),
@@ -57,7 +58,7 @@ class PelangganController extends Controller
             'id_alamat' => request('id_alamat'),
             'no_telp' => request('no_telp'),
             'token' =>request ('token'),
-        ]);
+       ]);
          
        
 
