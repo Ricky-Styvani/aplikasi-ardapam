@@ -22,7 +22,7 @@
 import Table from './datatable.vue';
 
 export default {
-    name: "listcatat",
+    name: "Listcatat",
     components:{
         Table
     },

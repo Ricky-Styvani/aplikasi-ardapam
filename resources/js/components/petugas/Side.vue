@@ -9,7 +9,7 @@
 
                      <li  class=" list-group-item d-flex align-items-center">
                             <v-icon name="pencil-alt"  ></v-icon>
-                            <router-link exact  to="" class= " text-dark text-decoration-none ml-4 ">
+                            <router-link exact  to="/catat" class= " text-dark text-decoration-none ml-4 ">
                             Catat</router-link>
                     </li>
 
