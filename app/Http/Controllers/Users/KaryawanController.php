@@ -18,19 +18,9 @@ class KaryawanController extends Controller
      */
     public function index(Request $request)
     {
-        $search = $request-> q;
-        $post = Karyawan::with('level')
-        ->when($search, function($post){
-            $post= $post->where('name','LIKE','%'.$search.'%')
-            ->orWhere ('id_karyawan','LIKE','%'.$search.'%')
-            ->orWhere ('level','LIKE','%'.$search.'%');
-        })->latest()->get();
+        $post = Karyawan::with('level')->latest()->get();
         $resource =KaryawanResource::collection($post);
         return $resource;
-        
-
-      
-           
         
     }
 

@@ -1,6 +1,6 @@
 <template>
  <div class="table-responsive">
-     <table id="my-table" class="table table-borderless table-striped table-hover display datatable" style="">
+     <table id="my-table" class="table table-borderless table-striped table-hover display datatable" style=" width:100%">
         <thead>
                         <tr >
                             <th>#</th>
@@ -21,7 +21,7 @@
                             <td>{{ item.id_alamat }}</td>
                             <td>{{ item.updated_at }}</td>
                             <td >
-                                <router-link :to="{name:'Pelanggans.edit', params: {pelangganNama: item.nama}}" tag="button" class="btn btn-success btn-sm">Edit</router-link>
+                                <router-link :to="{name:'Pelanggans.edit', params: {pelangganNama: item.id_pelanggan}}" tag="button" class="btn btn-success btn-sm">Edit</router-link>
                             </td>
                             
                             

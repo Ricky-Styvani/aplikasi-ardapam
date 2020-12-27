@@ -17,15 +17,16 @@ class PelangganResource extends JsonResource
         return [
             'id' => $this->id,
             'id_pelanggan' => $this->id_pelanggan,
-            'token' => $this->token,
             'nama' => $this->nama,
             'password' => $this->password,
             'no_telp' => $this->no_telp,
             'id_alamat'=> $this->id_alamat,
+            'token' => $this->meteran->token,
+            'meter_awal' => $this->meteran->meter_awal,
+            'meter_akhir' => $this->meteran->meter_akhir,
             'updated_at' => $this->updated_at->format('d F, Y'),
             //'deleted_at' => $this->deleted_at->format('d F, Y'),
             'link' => route('pelanggans.show',$this->nama),
-           // 'link' => route('karyawans.show',$this->id_karyawan),
         ];
         //return parent::toArray($request);
     }

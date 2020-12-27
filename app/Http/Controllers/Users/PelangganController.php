@@ -16,7 +16,7 @@ class PelangganController extends Controller
      */
     public function index()
     {
-        $post = Pelanggan::latest()->get();
+        $post = Pelanggan::with('meteran')->latest()->get();
         $resource =PelangganResource::collection($post);
         return $resource;
     }
@@ -50,14 +50,16 @@ class PelangganController extends Controller
 
         ]);
         
-
+        $meteran= Meteran::create([
+            'id_pelanggan' =>request ('id_pelanggan'),
+            'token' =>request ('token'),
+       ]);
        $request=Pelanggan::create([
             'id_pelanggan' =>request ('id_pelanggan'),
             'nama' => request('nama'),
             'password' => request('password'),
             'id_alamat' => request('id_alamat'),
             'no_telp' => request('no_telp'),
-            'token' =>request ('token'),
        ]);
          
        
@@ -65,12 +67,13 @@ class PelangganController extends Controller
         return response()->json([
             'massage'=>'your create pelanggan success',
             'request'=>$request,
+
         ]);
     }
 
     /**
      * Display the specified resource.
-     *
+     * 
      * @param  \App\Models\Pelanggan  $pelanggan
      * @return \Illuminate\Http\Response
      */
@@ -95,9 +98,11 @@ class PelangganController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Pelanggan  $pelanggan
+     * @param  \App\Models\Meteran  $meteran
+     *  
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Pelanggan $pelanggan)
+    public function update(Request $request, Pelanggan $pelanggan, Meteran $meteran)
     {
         sleep(1);
         request()->validate([
@@ -115,7 +120,6 @@ class PelangganController extends Controller
             'password' => request('password'),
             'id_alamat' => request('id_alamat'),
             'no_telp' => request('no_telp'),
-            'token' =>request ('token')
             
         ]);
 
@@ -127,14 +131,13 @@ class PelangganController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
+     *  @param  \App\Models\Meteran  $meteran
      * @param  \App\Models\Pelanggan  $pelanggan
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Pelanggan $pelanggan)
+    public function destroy(Pelanggan $pelanggan, Meteran $meteran,$id)
     {
         $pelanggan->delete();
-
         return response()->json([
             'massage'=>'your delete pelanggan success',
 

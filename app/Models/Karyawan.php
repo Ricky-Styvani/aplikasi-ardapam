@@ -18,18 +18,6 @@ class Karyawan extends Model
     public function level(){
         return $this->belongsTo(Level::class);
     }
-   /* Public static function getId()
-    {
-        $getId = DB::table('karyawans')->orderBy('id_karyawan','DESC')->take(1)->get();
-        foreach ($getId as $value);
-        $idlm= $value->id_kar;
-        $idbr= $idlm + 1;
-        $blt = date('y');
-        $angka= '017';
-        return $no = $angka.$blt.$idbr;
-        
-    }
-    */
 
     /*public function getAutoNumberOptions()
     {

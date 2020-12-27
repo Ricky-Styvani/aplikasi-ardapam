@@ -8,8 +8,9 @@ class Meteran extends Model
 {
     protected $table ='meterans';
     protected $guarded=[];
+    protected $primaryKey = 'id_pelanggan';
 
     public function pelanggans(){
-        return $this->hasMany(Pelanggan::class,'token');
+        return $this->hasOne(Pelanggan::class);
     }
 }

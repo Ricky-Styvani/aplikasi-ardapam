@@ -23,20 +23,23 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
             Route::get('', 'Users\KaryawanController@index');
             Route::get('{karyawan:name}', 'Users\KaryawanController@show')->name('karyawans.show');
             Route::patch('{karyawan:name}/edit', 'Users\KaryawanController@update');
-            Route::delete('{karyawan:name}/delete', 'Users\KaryawanController@destroy');
-
-           
-            
+            Route::delete('{karyawan:name}/delete', 'Users\KaryawanController@destroy');    
     });
 
     Route::group(['prefix' => 'levels'], function () {
-        Route::get('', 'Users\levelController@index');
+        Route::get('', 'Users\LevelController@index');
     });
 
     Route::group(['prefix' => 'pelanggans'], function () {
         Route::post('create', 'Users\PelangganController@store');
         Route::get('', 'Users\PelangganController@index');
-        Route::get('{pelanggan:nama}', 'Users\PelangganController@show')->name('pelanggans.show');
-        Route::patch('{pelanggan:nama}/edit', 'Users\PelangganController@update');
-        Route::delete('{pelanggan:nama}/delete', 'Users\PelangganController@destroy');
+        Route::get('{pelanggan:id_pelanggan}', 'Users\PelangganController@show')->name('pelanggans.show');
+        Route::patch('{pelanggan:id_pelanggan}/edit', 'Users\PelangganController@update');
+        Route::delete('{pelanggan:id_pelanggan}/delete', 'Users\PelangganController@destroy');
+    });
+
+    Route::group(['prefix' => 'meterans'], function () {
+        Route::post('create', 'Users\MeteranController@store');
+        Route::get('', 'Users\MeteranController@index');
+
     });
