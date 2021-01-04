@@ -16,7 +16,7 @@ class PelangganController extends Controller
      */
     public function index()
     {
-        $post = Pelanggan::with('meteran')->latest()->get();
+        $post = Pelanggan::latest()->get();
         $resource =PelangganResource::collection($post);
         return $resource;
     }
@@ -50,16 +50,15 @@ class PelangganController extends Controller
 
         ]);
         
-        $meteran= Meteran::create([
-            'id_pelanggan' =>request ('id_pelanggan'),
-            'token' =>request ('token'),
-       ]);
        $request=Pelanggan::create([
             'id_pelanggan' =>request ('id_pelanggan'),
             'nama' => request('nama'),
             'password' => request('password'),
             'id_alamat' => request('id_alamat'),
             'no_telp' => request('no_telp'),
+            'token' => request('token'),
+            'meter_awal'=>('0'),
+            'meter_akhir'=>('0'),
        ]);
          
        
@@ -98,11 +97,11 @@ class PelangganController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Pelanggan  $pelanggan
-     * @param  \App\Models\Meteran  $meteran
+     *
      *  
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Pelanggan $pelanggan, Meteran $meteran)
+    public function update(Request $request, Pelanggan $pelanggan)
     {
         sleep(1);
         request()->validate([
