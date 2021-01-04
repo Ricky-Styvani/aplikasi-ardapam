@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers\catat;
+use App\Models\{Pelanggan,Meteran};
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App\Http\Resources\PelangganResource;
 class CatatController extends Controller
 {
     /**
@@ -14,7 +15,9 @@ class CatatController extends Controller
      */
     public function index()
     {
-        //
+        $post = Pelanggan::with('meteran')->latest()->get();
+        $resource =PelangganResource::collection($post);
+        return $resource;
     }
 
     /**

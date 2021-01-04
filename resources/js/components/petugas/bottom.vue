@@ -47,7 +47,7 @@
                   <div class="container justify-content-center ">
                 <v-icon name="pencil-alt"  ></v-icon>
                 </div>
-                <router-link exact  to="" tag= "a" class= " text-dark text-decoration-none  ">
+                <router-link exact  to="/catat" tag= "a" class= " text-dark text-decoration-none  ">
                  Catat</router-link>
          </li>
                <li class="nav-item ">

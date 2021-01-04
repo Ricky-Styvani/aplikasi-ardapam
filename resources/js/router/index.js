@@ -7,7 +7,9 @@ import ListPelanggan from '../views/admin/users/pelanggan/List_pelanggan.vue'
 import FormPelanggan from '../views/admin/users/pelanggan/Form_pelanggan.vue'
 import EditPelanggan from '../views/admin/users/pelanggan/Edit_pelanggan.vue'
 
-
+//petugas
+//catat
+import ListCatat from '../views/petugas/catat/list_catat.vue'
 
 export default{
     mode: 'history',
@@ -46,6 +48,14 @@ export default{
                 path: '/pelanggans/:pelangganNama/edit',
                 name: 'Pelanggans.edit',
                 component: EditPelanggan,
+            },
+
+            //petugas
+            //catat
+            {
+                path: '/catat',
+                name: 'Listcatat',
+                component: ListCatat,
             },
 
     ]
