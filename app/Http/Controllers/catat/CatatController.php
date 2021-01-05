@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\catat;
-use App\Models\{Pelanggan,Meteran};
+use App\Models\{Pelanggan};
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -15,7 +15,7 @@ class CatatController extends Controller
      */
     public function index()
     {
-        $post = Pelanggan::with('meteran')->latest()->get();
+        $post = Pelanggan::latest()->get();
         $resource =PelangganResource::collection($post);
         return $resource;
     }
@@ -47,9 +47,9 @@ class CatatController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Pelanggan $pelanggan)
     {
-        //
+        return PelangganResource::make($pelanggan);
     }
 
     /**
@@ -58,9 +58,9 @@ class CatatController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
-        //
+        
     }
 
     /**
@@ -70,9 +70,28 @@ class CatatController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Pelanggan $pelanggan)
     {
-        //
+        sleep(1);
+        request()->validate([
+            'id_pelanggan' => 'required',
+            'nama' => 'required',
+            'meter_awal'=>'required',
+            'meter_akhir' =>'required',
+
+        ]);
+        $pelanggan->update([
+            'id_pelanggan' => request('id_pelanggan'),
+            'nama' =>request ('nama'),
+            'meter_awal' =>request ('meter_awal'),
+            'meter_akhir' => request('meter_akhir'),
+            
+        ]);
+
+        return response()->json([
+            'massage'=>'your update pelanggan success',
+            'request'=>$request,
+        ]);
     }
 
     /**

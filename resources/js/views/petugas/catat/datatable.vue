@@ -19,10 +19,10 @@
                                 <td >{{ item.nama }}</td>
                                 <td >{{ item.token }}</td>
                                 <td>{{ item.id_alamat }}</td>
-                                <td><input class="form-control form-control-sm" type="text" ></td>
-                                <td><input class="form-control form-control-sm" type="text" ></td>
+                                <td>{{ item.meter_awal}}</td>
+                                <td>{{item.meter_akhir}}</td>
                                 <td >
-                                    <button type="submit" class="btn btn-success btn-sm">Kirim</button>
+                                     <router-link :to="{name:'Catats.edit', params: {pelangganNama: item.id_pelanggan}}" tag="button" class="btn btn-success btn-sm"><v-icon name="pencil-alt"></v-icon></router-link>
                                 </td>
                             
                         </tr>

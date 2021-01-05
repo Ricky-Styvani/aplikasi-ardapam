@@ -20,6 +20,9 @@ class CreateTablePelanggan extends Migration
             $table->string('password');
             $table->integer('no_telp');
             $table->string('id_alamat');
+            $table->integer('meter_awal');
+            $table->integer('meter_akhir');
+            $table->integer('token');
             $table->softDeletes('deleted_at');
             $table->timestamps();
         });

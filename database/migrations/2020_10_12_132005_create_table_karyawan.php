@@ -19,7 +19,7 @@ class CreateTableKaryawan extends Migration
             $table->string('name');
             $table->string('password');
             $table->integer('no_telp');
-            $table->string('level');
+            $table->string('level_id');
             $table->rememberToken();
             $table->timestamps();
         });

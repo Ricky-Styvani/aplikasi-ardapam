@@ -45,7 +45,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     });
 
     Route::group(['prefix' => 'catats'], function () {
-        Route::post('create', 'catat\MeteranController@store');
-        Route::get('', 'catat\catatController@index');
+        Route::get('', 'catat\CatatController@index');
+        Route::get('{pelanggan:id_pelanggan}', 'catat\CatatController@show')->name('pelanggans.show');
+        Route::patch('{pelanggan:id_pelanggan}/edit', 'catat\CatatController@update');
 
     });
