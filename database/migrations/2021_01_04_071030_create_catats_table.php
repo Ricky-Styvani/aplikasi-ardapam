@@ -16,6 +16,7 @@ class CreateCatatsTable extends Migration
         Schema::create('transaksis', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_pelanggan')->reference('id_pelanggan')->on('pelanggans');
+            $table->integer('id_transaksi')->unique();
             $table->bigInteger('harga_air');
             $table->integer('meter_awal');
             $table->integer('meter_akhir');
@@ -36,6 +37,6 @@ class CreateCatatsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('catats');
+        Schema::dropIfExists('transaksis');
     }
 }

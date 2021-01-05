@@ -8,4 +8,8 @@ class Catat extends Model
 {
     protected $table ='transaksis';
     protected $guarded=[];
+    protected $primaryKey= 'id_pelanggan';
+    public function pelanggans(){
+        return $this->hasOne(Pelanggan::class);
+    }
 }

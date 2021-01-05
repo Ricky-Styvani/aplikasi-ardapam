@@ -9,5 +9,10 @@ class Pelanggan extends Model
 {
     protected $table ='pelanggans';
     protected $guarded=[];
+    protected $primaryKey= 'id_pelanggan';
+
+    public function catat(){
+        return $this->belongsTo(Catat::class,'id_pelanggan');
+    }
 
 }

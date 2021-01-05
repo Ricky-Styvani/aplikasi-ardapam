@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\catat;
-use App\Models\{Pelanggan};
+use App\Models\{Pelanggan,Catat};
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -15,7 +15,7 @@ class CatatController extends Controller
      */
     public function index()
     {
-        $post = Pelanggan::latest()->get();
+        $post = Pelanggan::with('catat')->latest()->get();
         $resource =PelangganResource::collection($post);
         return $resource;
     }
