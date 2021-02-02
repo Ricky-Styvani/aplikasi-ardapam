@@ -162,12 +162,13 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Alfa6661\AutoNumber\AutoNumberServiceProvider::class,
-        
+        Laravel\Sanctum\SanctumServiceProvider::class,
+       
 
         /*
          * Package Service Providers...
          */
-
+     
         /*
          * Application Service Providers...
          */

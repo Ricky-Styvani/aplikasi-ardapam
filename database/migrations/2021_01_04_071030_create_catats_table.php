@@ -15,15 +15,18 @@ class CreateCatatsTable extends Migration
     {
         Schema::create('transaksis', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_pelanggan')->reference('id_pelanggan')->on('pelanggans');
+            $table->integer('id_pelanggan');
             $table->integer('id_transaksi')->unique();
             $table->bigInteger('harga_air');
             $table->integer('meter_awal');
             $table->integer('meter_akhir');
             $table->integer('admin');
             $table->integer('perawatan');
-            $table->bigInteger('total');
+            $table->integer('total_meter');
+            $table->bigInteger('total_harga');
+            $table->bigInteger('total_bayar');
             $table->DATETIME('pembayaran');
+            $table->DATETIME('kode_bulan');
             $table->string('status');
             $table->softDeletes('deleted_at');
             $table->timestamps();

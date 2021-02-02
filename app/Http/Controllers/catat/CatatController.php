@@ -38,21 +38,35 @@ class CatatController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $pelanggan= Pelanggan::findOrFail(request('id_pelanggan'));
+        $data[]= array(
+            'id_pelanggan' =>$pelanggan->id_pelanggan,
+            'meter_awal' => $pelanggan->meter_awal,
+            'meter_akhir' => $pelanggan->meter_akhir,
+            'harga_air' =>('13300'),
+            'perawatan' => ('3000'),
+            'admin' => ('2000'),
+        );
+        $request= Catat::insert($data);
+          
+         return response()->json([
+             'massage'=>'your create transaksi success',
+             'request'=>$request,
+         ]);
     }
 
     /**
      * Display the specified resource.
      *
      * @param  int  $id
+     * @param  \App\Models\Pelanggan $pelanggan
      * @return \Illuminate\Http\Response
      */
     public function show(Pelanggan $pelanggan)
     {
         return PelangganResource::make($pelanggan);
     }
-
-    /**
+   /** 
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -89,7 +103,7 @@ class CatatController extends Controller
         ]);
 
         return response()->json([
-            'massage'=>'your update pelanggan success',
+            'massage'=>'your update meteran success',
             'request'=>$request,
         ]);
     }

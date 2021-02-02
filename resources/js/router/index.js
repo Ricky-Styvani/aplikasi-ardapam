@@ -12,6 +12,8 @@ import EditPelanggan from '../views/admin/users/pelanggan/Edit_pelanggan.vue'
 import ListCatat from '../views/petugas/catat/list_catat.vue'
 import FormCatat from '../views/petugas/catat/form_catat.vue'
 
+//
+
 export default{
     mode: 'history',
     linkActiveClass: 'font-weight-bold text-decoration-none',

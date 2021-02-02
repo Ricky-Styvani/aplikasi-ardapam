@@ -14,19 +14,12 @@
         <div class="card-body">
            <div class="row">
             <div class="col-md-8 offset-md-2">
-                <form  method="post" action="#" @submit.prevent="update" enctype="multipart/form-data">
+                <form  method="post" action="#" @submit.prevent="store" enctype="multipart/form-data">
                      <div class="form-group">
                         <label for="id">Id Pelanggan</label>
                         <input type="text" class="form-control" v-model="form.id_pelanggan" value="">
                        
                              <span v-if="theErrors.id_pelanggan" class=" text-danger">{{theErrors.id_pelanggan[0]}}</span>
-                    </div>
-                    <div class="form-group">
-                        <label for="nama">Nama</label>
-                        <input type="text" class="form-control" v-model="form.nama" value="">
-                       
-                             <span v-if="theErrors.nama" class=" text-danger">{{theErrors.nama[0]}}</span>
-                       
                     </div>
 
                      <div class="form-group">
@@ -45,7 +38,7 @@
                     
                     
                     <div class="form-group mb-0 d-flex">
-                        <router-link  to= "/pelanggans" tag="button" class="btn btn-secondary btn-sm">cencel</router-link>
+                        <router-link  to= "/catats" tag="button" class="btn btn-secondary btn-sm">cencel</router-link>
                         <button type="submit" class="btn btn-success btn-sm d-flex align-items-center">
                             kirim
                              <template v-if="loading">
@@ -88,18 +81,59 @@ export default {
 
         async update(){
              this.loading= true;
-            let response= await axios.patch(`http://127.0.0.1:8000/api/catats/${this.$route.params.pelangganNama}/edit`, this.form);
+             try{
+                    let response= await axios.patch(`http://127.0.0.1:8000/api/catats/${this.$route.params.pelangganNama}/edit`, this.form);
+                                if(response.status==200){
+                                    this.loading= false;
+                                    this.$toasted.show(response.data.massage,{
+                                                        position:'top-center',
+                                                        type: 'success',
+                                                        duration:3000,
+                                                    });
+                                }
+             } catch(e){
+                     this.loading= false;
+                     this.$toasted.show("gagal update.",{
+                            position:'top-center',
+                            type: 'error',
+                            duration:3000,
+                        });
+                    this.theErrors= e.response.data.errors;
+                   
+            }
+            
+        },
+        async store() {
+                this.loading= true;
+                try{
+                        let response= await axios.post(`http://127.0.0.1:8000/api/catats/${this.$route.params.pelangganNama}/create`, this.form)
 
-             if(response.status==200){
-
-                 this.$toasted.show(response.data.massage,{
+                        if(response.status==200){
+                                this.update(),
+                                this.theerrors = [],
+                                this.loading= false;
+                                this.$toasted.show(response.data.massage,{
                                     position:'top-center',
                                     type: 'success',
                                     duration:3000,
                                 });
-                this.$router.push('/catats');
-             }
-        },
+                                
+                                 this.$router.push('/catats');
+                               
+                        }
+                       
+                }catch(e){
+                     this.$toasted.show("api error.",{
+                            position:'top-center',
+                            type: 'error',
+                            duration:3000,
+                        });
+                    this.theErrors= e.response.data.errors;
+                    this.loading= false;
+                    this.$router.push('/catats');
+                   
+                }
+            },
         async deleteKaryawan(){
             let response = await axios.delete(`http://127.0.0.1:8000/api/pelanggans/${this.$route.params.pelangganNama}/delete`);
              if(response.status==200){

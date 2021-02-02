@@ -17,7 +17,7 @@
                 <form  method="post" action="#" @submit.prevent="store" enctype="multipart/form-data">
                     <div class="form-group">
                                 <label for="nama">Id karyawan</label>
-                                <input type="text" class="form-control" v-model="form.id_karyawan" value="level.level">
+                                <input type="text" class="form-control" v-model="form.id_karyawan" value="">
                             
                                     <span v-if="theErrors.id_karyawan" class=" text-danger">{{theErrors.id_karyawan[0]}}</span>
                             
@@ -110,7 +110,7 @@ export default {
             async store() {
                 this.loading= true;
                 try{
-                        let response= await axios.post('http://127.0.0.1:8000/api/karyawans/create', this.form)
+                        let response= await axios.post('http://127.0.0.1:8000/api/laporans/create', this.form)
 
                         if(response.status==200){
                                 this.form.name = ""

@@ -46,6 +46,26 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+
+        'karyawan' => [
+            'driver' => 'session',
+            'provider' => 'karyawans',
+          ],
+
+        'karyawan-api' => [
+            'driver' => 'token',
+            'provider' => 'karyawans',
+        ],
+
+        'pelanggan' => [
+            'driver' => 'session',
+            'provider' => 'pelanggans',
+          ],
+
+        'pelanggan-api' => [
+            'driver' => 'token',
+            'provider' => 'pelanggans',
+        ],
     ],
 
     /*
@@ -66,9 +86,13 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        'karyawans' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => App\Models\Karyawan::class,
+        ],
+        'Pelanggans' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Pelanggan::class,
         ],
 
         // 'users' => [
@@ -93,8 +117,8 @@ return [
     */
 
     'passwords' => [
-        'users' => [
-            'provider' => 'users',
+        'pelanggans' => [
+            'provider' => 'pelanggans',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,

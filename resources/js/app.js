@@ -7,7 +7,9 @@ import axios from 'axios';
 import VueAxios from 'vue-axios';
 import routes from './router'
 //import App from './components/admin/App.vue';
-import App from './components/petugas/petugas.vue';
+//import App from './components/petugas/petugas.vue';
+//import App from './components/pelanggan/pelanggan.vue';
+import App from './components/login.vue';
 import Toasted from 'vue-toasted';
 import 'vue-awesome/icons';
 import Icon from 'vue-awesome/components/Icon';

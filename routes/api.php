@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |'Users\KaryawanController@index'
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
@@ -38,15 +38,15 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
         Route::delete('{pelanggan:id_pelanggan}/delete', 'Users\PelangganController@destroy');
     });
 
-    Route::group(['prefix' => 'meterans'], function () {
-        Route::post('create', 'Users\MeteranController@store');
-        Route::get('', 'Users\MeteranController@index');
-
-    });
 
     Route::group(['prefix' => 'catats'], function () {
         Route::get('', 'catat\CatatController@index');
+        Route::post('{pelanggan:id_pelanggan}/create', 'catat\CatatController@store');
         Route::get('{pelanggan:id_pelanggan}', 'catat\CatatController@show')->name('pelanggans.show');
         Route::patch('{pelanggan:id_pelanggan}/edit', 'catat\CatatController@update');
 
+    });
+
+    Route::group(['prefix' => 'laporans'], function () {
+        Route::post('create', 'dashboard\LaporanController@store');
     });
